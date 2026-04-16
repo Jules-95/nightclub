@@ -1,0 +1,22 @@
+<style>
+    .sidebar {
+        background: #F5F5F5;
+        border-radius: 1rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 2rem;
+    }
+
+    .side-item {
+        font-size: 1.6rem;
+    }
+</style>
+
+<nav>
+    <ul class="sidebar">
+        <li class="side-item"><a href="{{ path('app_global') }}">Accueil</a></li>
+        <li class="side-item"><a href="{{ path('app_global_apropos') }}">À propos</a></li>
+        <li class="side-item"><a href="{{ path('contact') }}">Contact</a></li>
+    </ul>
+</nav>

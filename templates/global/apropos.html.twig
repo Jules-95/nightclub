@@ -9,7 +9,19 @@
 </style>
 
 <div class="example-wrapper">
-<h1>A propos</h1>
+<h1>{{ 'a propos'|upper }}</h1>
 <a href="{{ path('app_global') }}">Retour</a>
+
+{% for step in Historique %}
+    <p>{{ step.annee }} - {{ step.event }}</p>
+{% else %}
+    <p>Aucun historique disponible.</p>
+{% endfor %}
+
+
 </div>
+
+
 {% endblock %}
+
+
