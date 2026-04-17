@@ -3,23 +3,19 @@
 {% block title %}Hello GlobalController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="flex flex-col items-center">
+    <h1 class="text-3xl font-bold text-gray-800 mb-4">{{ title }}</h1>
 
-<div class="example-wrapper">
-    <h1>{{title}}</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/jlsmi/Desktop/symfony/nightclub/src/Controller/GlobalController.php</code></li>
-        <li>Your template at <code>C:/Users/jlsmi/Desktop/symfony/nightclub/templates/global/index.html.twig</code></li>
+    <ul class="list-disc pl-5 text-gray-600 mb-6">
+        <li>Ton controller <code>C:/Users/jlsmi/Desktop/symfony/nightclub/src/Controller/GlobalController.php</code></li>
+        <li>Ton template <code>C:/Users/jlsmi/Desktop/symfony/nightclub/templates/global/index.html.twig</code></li>
     </ul>
 
-    <a href="{{ path('contact') }}">Aller à Contact</a>
-    <a href="{{ path('app_global_apropos') }}">Aller à Apropos</a>
+    <div class="flex gap-4 mb-6">
+        <a href="{{ path('contact') }}" class="bg-gray-900 text-white px-4 py-2 rounded hover:bg-gray-700">Contact</a>
+        <a href="{{ path('app_global_apropos') }}" class="bg-gray-900 text-white px-4 py-2 rounded hover:bg-gray-700">À propos</a>
+    </div>
 
-    <img src="{{ asset('img/Fete.png')}}"
+    <img src="{{ asset('img/Fete.png') }}" class="rounded-lg shadow-md max-w-md">
 </div>
 {% endblock %}

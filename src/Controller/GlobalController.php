@@ -13,7 +13,7 @@ final class GlobalController extends AbstractController
     public function index(): Response
     {
         return $this->render('global/index.html.twig', [
-            'title' => 'Mon titre dynamique',
+            'title' => '🪩 Night Club 🪩',
         ]);
     }
 
