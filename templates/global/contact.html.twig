@@ -2,13 +2,28 @@
 
 {% block title %}Hello GlobalController!{% endblock %}
 
-{% block body %}
+{% form_theme form 'tailwind_2_layout.html.twig' %}
 
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper{ background: #F5F5F5; padding: 2px 6px; }
+    .form { border: 1px solid; border-radius: 2px;} 
+</style>
+
+<div class="form">
+    {{ form_start(form, {'attr' : {'class': 'space-y-4'}}) }} 
+    {{ form_widget(form) }}
+    <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">
+        Envoyer
+    </button>    
+    {{ form_end(form) }}
+</div>
+
+    <h1>Page contact</h1>
+    <a href="{{ path('app_global') }}">Retour</a>
 
 <div class="example-wrapper">
-<h1>Page contact</h1>
-<a href="{{ path('app_global') }}">Retour</a>
-
-{{ ux_map(map, {style: 'height: 600px;'}) }}
+    {{ ux_map(map, {style: 'height: 600px;'}) }}
 </div>
 {% endblock %}
