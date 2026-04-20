@@ -8,22 +8,29 @@ use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Soiree;
 use App\Repository\SoireeRepository;
+use App\Form\SoireeType;
+use Symfony\Component\HttpFoundation\Request;
+
 
 final class SoireeController extends AbstractController
 {
     #[Route('/soiree/creer', name: 'creer_soiree')]
-    public function creerSoiree(EntityManagerInterface $em): Response
+    public function creerSoiree(EntityManagerInterface $em, Request $request): Response
     {
         $soiree = new Soiree();
-        $soiree->setTitre("Soirée mousse");
-        $soiree->setDatesoiree(new \DateTimeImmutable());
-        $soiree->setDatecreation(new \DateTimeImmutable());
-        $soiree->setStatut("actif");
+        $form = $this->createForm(SoireeType::class, $soiree);
+        $form->handleRequest($request);
 
-        $em->persist($soiree);
-        $em->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $soiree->setDatecreation(new \DateTimeImmutable());
+            $em->persist($soiree);
+            $em->flush();
+            return $this->redirectToRoute('soirees');
+        }
 
-        return new Response("Soirée créée avec l'ID : " . $soiree->getId());
+        return $this->render('soiree/creer.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     #[Route('/soirees', name: 'soirees')]
