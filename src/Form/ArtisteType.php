@@ -3,8 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Artiste;
-use App\Entity\Soiree;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,11 +14,6 @@ class ArtisteType extends AbstractType
         $builder
             ->add('nom')
             ->add('prenom')
-            ->add('soirees', EntityType::class, [
-                'class' => Soiree::class,
-                'choice_label' => 'id',
-                'multiple' => true,
-            ])
         ;
     }
 

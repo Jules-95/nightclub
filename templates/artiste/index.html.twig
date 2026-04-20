@@ -1,37 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Artiste index{% endblock %}
+{% block title %}Liste des artistes{% endblock %}
 
 {% block body %}
-    <h1>Artiste index</h1>
+<div class="max-w-4xl mx-auto mt-10 p-6">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for artiste in artistes %}
-            <tr>
-                <td>{{ artiste.id }}</td>
-                <td>{{ artiste.nom }}</td>
-                <td>{{ artiste.prenom }}</td>
-                <td>
-                    <a href="{{ path('app_artiste_show', {'id': artiste.id}) }}">show</a>
-                    <a href="{{ path('app_artiste_edit', {'id': artiste.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold">Liste des artistes</h1>
+        {# Bouton pour créer un nouvel artiste #}
+        <a href="{{ path('app_artiste_new') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+            + Ajouter un artiste
+        </a>
+    </div>
 
-    <a href="{{ path('app_artiste_new') }}">Create new</a>
+    {# Tableau avec ombre et coins arrondis #}
+    <div class="shadow rounded-xl overflow-hidden">
+        <table class="w-full text-left">
+            {# En-tête gris foncé #}
+            <thead class="bg-gray-800 text-white">
+                <tr>
+                    <th class="px-4 py-3">Id</th>
+                    <th class="px-4 py-3">Nom</th>
+                    <th class="px-4 py-3">Prénom</th>
+                    <th class="px-4 py-3">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for artiste in artistes %}
+                {# Alternance de couleur entre les lignes #}
+                <tr class="border-b hover:bg-gray-50 {% if loop.index is even %}bg-gray-100{% else %}bg-white{% endif %}">
+                    <td class="px-4 py-3">{{ artiste.id }}</td>
+                    <td class="px-4 py-3 font-semibold">{{ artiste.nom }}</td>
+                    <td class="px-4 py-3">{{ artiste.prenom }}</td>
+                    <td class="px-4 py-3 flex gap-2">
+                        {# Bouton voir en bleu #}
+                        <a href="{{ path('app_artiste_show', {'id': artiste.id}) }}" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 text-sm">
+                            Voir
+                        </a>
+                        {# Bouton modifier en orange #}
+                        <a href="{{ path('app_artiste_edit', {'id': artiste.id}) }}" class="bg-orange-500 text-white px-3 py-1 rounded hover:bg-orange-600 text-sm">
+                            Modifier
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4" class="px-4 py-6 text-center text-gray-500">Aucun artiste trouvé.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
 {% endblock %}

@@ -24,6 +24,9 @@ class SoireeType extends AbstractType
                 'choice_label' => 'nom',
                 'multiple' => true,
                 'required' => false,
+                'attr' => [
+                    'class' => 'w-full border rounded px-3 py-2 h-32'
+                ]
             ])
         ;
     }
