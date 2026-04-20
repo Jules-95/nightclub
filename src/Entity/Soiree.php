@@ -22,6 +22,9 @@ class Soiree
     #[ORM\Column]
     private ?\DateTimeImmutable $datecreation = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $statut = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +62,18 @@ class Soiree
     public function setDatecreation(\DateTimeImmutable $datecreation): static
     {
         $this->datecreation = $datecreation;
+
+        return $this;
+    }
+
+    public function getStatut(): ?string
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(?string $statut): static
+    {
+        $this->statut = $statut;
 
         return $this;
     }
