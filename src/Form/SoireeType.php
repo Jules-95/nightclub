@@ -16,6 +16,9 @@ class SoireeType extends AbstractType
             ->add('datesoiree', null, [
                 'widget' => 'single_text',
             ])
+            ->add('datecreation', null, [
+                'widget' => 'single_text',
+            ])
             ->add('statut')
         ;
     }
