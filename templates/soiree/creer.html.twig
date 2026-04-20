@@ -4,8 +4,9 @@
 
 {% block body %}
     <h1>Créer une soirée</h1>
-    {{ form_start(form) }}
+    {{ form_start(form, { attr: { 'novalidate': 'novalidate', 'data-turbo': 'false' } }) }}
     {{ form_widget(form) }}
+    {{ form_errors(form) }}
     <button type="submit">Créer la soirée</button>
     {{ form_end(form) }}
 {% endblock %}

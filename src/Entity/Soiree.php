@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\SoireeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SoireeRepository::class)]
 class Soiree
@@ -14,6 +15,11 @@ class Soiree
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Le titre ne peut pas être vide.')]
+    #[Assert\Length(
+        min: 5,
+        minMessage: 'Le titre doit faire au minimum 5 caractères.'
+    )]
     private ?string $titre = null;
 
     #[ORM\Column]
