@@ -11,7 +11,13 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        SoireeFactory::createMany(20);
-        ArtisteFactory::createMany(20);
+        $artistes = ArtisteFactory::createMany(10);
+        $manager->flush();
+
+        SoireeFactory::createMany(10, function () use ($artistes) {
+            return [
+                'artistes' => [$artistes[array_rand($artistes)]],
+            ];
+        });
     }
 }
