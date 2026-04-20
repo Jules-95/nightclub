@@ -34,7 +34,7 @@ final class SoireeFactory extends PersistentProxyObjectFactory
         return [
             'datecreation' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
             'datesoiree' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
-            'titre' => self::faker()->text(255),
+            'titre' => 'Soirée ' . self::faker('fr_FR')->colorName(),
             'statut' => self::faker()->randomElement(['À venir', 'En préparation', 'Terminée', 'Annulée']),
         ];
     }
