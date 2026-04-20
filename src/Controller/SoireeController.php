@@ -40,4 +40,24 @@ final class SoireeController extends AbstractController
         $soiree = $soireeRepository->find($id);
         dd($soiree);
     }
+
+    #[Route('/soiree/{id}/update', name: 'update_soiree')]
+    public function update_soiree(EntityManagerInterface $em, int $id): Response
+    {
+        $repository = $em->getRepository(Soiree::class);
+        $soiree = $repository->find($id);
+        $soiree->setTitre("nouveau nom de soiree $id");
+        $em->flush();
+        dd($soiree);
+    }
+
+    #[Route('/soiree/{id}/delete', name: 'delete_soiree')]
+    public function delete_soiree(EntityManagerInterface $em, int $id): Response
+    {
+        $repository = $em->getRepository(Soiree::class);
+        $soiree = $repository->find($id);
+        $em->remove($soiree);
+        $em->flush();
+        return $this->redirectToRoute('soirees');
+    }
 }
