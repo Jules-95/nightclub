@@ -1,38 +1,50 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Soiree{% endblock %}
+{% block title %}{{ soiree.titre }}{% endblock %}
 
 {% block body %}
-    <h1>Soiree</h1>
+<div class="max-w-2xl mx-auto mt-10 p-6 bg-white rounded-xl shadow">
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ soiree.id }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ soiree.titre }}</td>
-            </tr>
-            <tr>
-                <th>Datesoiree</th>
-                <td>{{ soiree.datesoiree ? soiree.datesoiree|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Datecreation</th>
-                <td>{{ soiree.datecreation ? soiree.datecreation|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Statut</th>
-                <td>{{ soiree.statut }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold">{{ soiree.titre }}</h1>
+        {# Lien retour vers la liste #}
+        <a href="{{ path('app_soiree_index') }}" class="text-gray-500 hover:text-gray-700 text-sm">
+            ← Retour à la liste
+        </a>
+    </div>
 
-    <a href="{{ path('app_soiree_index') }}">back to list</a>
+    {# Fiche détail de la soirée #}
+    <div class="divide-y border rounded-xl overflow-hidden">
+        <div class="flex px-4 py-3 bg-gray-50">
+            <span class="w-40 font-semibold text-gray-600">Id</span>
+            <span>{{ soiree.id }}</span>
+        </div>
+        <div class="flex px-4 py-3">
+            <span class="w-40 font-semibold text-gray-600">Titre</span>
+            <span>{{ soiree.titre }}</span>
+        </div>
+        <div class="flex px-4 py-3 bg-gray-50">
+            <span class="w-40 font-semibold text-gray-600">Date soirée</span>
+            <span>{{ soiree.datesoiree ? soiree.datesoiree|date('d/m/Y H:i') : '' }}</span>
+        </div>
+        <div class="flex px-4 py-3">
+            <span class="w-40 font-semibold text-gray-600">Date création</span>
+            <span>{{ soiree.datecreation ? soiree.datecreation|date('d/m/Y H:i') : '' }}</span>
+        </div>
+        <div class="flex px-4 py-3 bg-gray-50">
+            <span class="w-40 font-semibold text-gray-600">Statut</span>
+            <span>{{ soiree.statut }}</span>
+        </div>
+    </div>
 
-    <a href="{{ path('app_soiree_edit', {'id': soiree.id}) }}">edit</a>
+    {# Actions #}
+    <div class="flex gap-3 mt-6">
+        <a href="{{ path('app_soiree_edit', {'id': soiree.id}) }}" class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">
+            Modifier
+        </a>
+        {{ include('soiree/_delete_form.html.twig') }}
+    </div>
 
-    {{ include('soiree/_delete_form.html.twig') }}
+</div>
 {% endblock %}
+

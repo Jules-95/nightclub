@@ -1,41 +1,60 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Soiree index{% endblock %}
+{% block title %}Liste des soirées{% endblock %}
 
 {% block body %}
-    <h1>Soiree index</h1>
+<div class="max-w-4xl mx-auto mt-10 p-6">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Titre</th>
-                <th>Datesoiree</th>
-                <th>Datecreation</th>
-                <th>Statut</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for soiree in soirees %}
-            <tr>
-                <td>{{ soiree.id }}</td>
-                <td>{{ soiree.titre }}</td>
-                <td>{{ soiree.datesoiree ? soiree.datesoiree|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ soiree.datecreation ? soiree.datecreation|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ soiree.statut }}</td>
-                <td>
-                    <a href="{{ path('app_soiree_show', {'id': soiree.id}) }}">show</a>
-                    <a href="{{ path('app_soiree_edit', {'id': soiree.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold">Liste des soirées</h1>
+        {# Bouton pour créer une nouvelle soirée #}
+        <a href="{{ path('app_soiree_new') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+            + Créer une soirée
+        </a>
+    </div>
 
-    <a href="{{ path('app_soiree_new') }}">Create new</a>
+    {# Tableau avec ombre et coins arrondis #}
+    <div class="shadow rounded-xl overflow-hidden">
+        <table class="w-full text-left">
+            {# En-tête gris foncé #}
+            <thead class="bg-gray-800 text-white">
+                <tr>
+                    <th class="px-4 py-3">Id</th>
+                    <th class="px-4 py-3">Titre</th>
+                    <th class="px-4 py-3">Date soirée</th>
+                    <th class="px-4 py-3">Date création</th>
+                    <th class="px-4 py-3">Statut</th>
+                    <th class="px-4 py-3">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for soiree in soirees %}
+                {# Alternance de couleur entre les lignes #}
+                <tr class="border-b hover:bg-gray-50 {% if loop.index is even %}bg-gray-100{% else %}bg-white{% endif %}">
+                    <td class="px-4 py-3">{{ soiree.id }}</td>
+                    <td class="px-4 py-3 font-semibold">{{ soiree.titre }}</td>
+                    <td class="px-4 py-3">{{ soiree.datesoiree ? soiree.datesoiree|date('d/m/Y H:i') : '' }}</td>
+                    <td class="px-4 py-3">{{ soiree.datecreation ? soiree.datecreation|date('d/m/Y H:i') : '' }}</td>
+                    <td class="px-4 py-3">{{ soiree.statut }}</td>
+                    <td class="px-4 py-3 flex gap-2">
+                        {# Bouton show en bleu #}
+                        <a href="{{ path('app_soiree_show', {'id': soiree.id}) }}" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 text-sm">
+                            Voir
+                        </a>
+                        {# Bouton edit en orange #}
+                        <a href="{{ path('app_soiree_edit', {'id': soiree.id}) }}" class="bg-orange-500 text-white px-3 py-1 rounded hover:bg-orange-600 text-sm">
+                            Modifier
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6" class="px-4 py-6 text-center text-gray-500">Aucune soirée trouvée.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
 {% endblock %}
