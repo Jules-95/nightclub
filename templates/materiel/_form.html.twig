@@ -1,4 +1,17 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_start(form, { attr: { 'novalidate': 'novalidate', 'data-turbo': 'false', 'class': 'space-y-4' } }) }}
+
+    <div class="text-red-500">
+        {{ form_errors(form) }}
+    </div>
+
+    <div class="flex flex-col gap-1">
+        {{ form_label(form.nom, 'Nom', { label_attr: { class: 'font-semibold' } }) }}
+        {{ form_widget(form.nom, { attr: { class: 'w-full border rounded px-3 py-2' } }) }}
+        <div class="text-red-500 text-sm">{{ form_errors(form.nom) }}</div>
+    </div>
+
+    <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 cursor-pointer">
+        {{ button_label|default('Enregistrer') }}
+    </button>
+
 {{ form_end(form) }}

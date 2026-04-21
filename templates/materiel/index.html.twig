@@ -1,35 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Materiel index{% endblock %}
+{% block title %}Liste du matériel{% endblock %}
 
 {% block body %}
-    <h1>Materiel index</h1>
+<div class="max-w-4xl mx-auto mt-10 p-6">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for materiel in materiels %}
-            <tr>
-                <td>{{ materiel.id }}</td>
-                <td>{{ materiel.nom }}</td>
-                <td>
-                    <a href="{{ path('app_materiel_show', {'id': materiel.id}) }}">show</a>
-                    <a href="{{ path('app_materiel_edit', {'id': materiel.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold">Liste du matériel</h1>
+        {# Bouton pour créer un nouveau matériel #}
+        <a href="{{ path('app_materiel_new') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+            + Ajouter du matériel
+        </a>
+    </div>
 
-    <a href="{{ path('app_materiel_new') }}">Create new</a>
+    {# Tableau avec ombre et coins arrondis #}
+    <div class="shadow rounded-xl overflow-hidden">
+        <table class="w-full text-left">
+            {# En-tête gris foncé #}
+            <thead class="bg-gray-800 text-white">
+                <tr>
+                    <th class="px-4 py-3">Id</th>
+                    <th class="px-4 py-3">Nom</th>
+                    <th class="px-4 py-3">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for materiel in materiels %}
+                {# Alternance de couleur entre les lignes #}
+                <tr class="border-b hover:bg-gray-50 {% if loop.index is even %}bg-gray-100{% else %}bg-white{% endif %}">
+                    <td class="px-4 py-3">{{ materiel.id }}</td>
+                    <td class="px-4 py-3 font-semibold">{{ materiel.nom }}</td>
+                    <td class="px-4 py-3 flex gap-2">
+                        <a href="{{ path('app_materiel_show', {'id': materiel.id}) }}" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 text-sm">
+                            Voir
+                        </a>
+                        <a href="{{ path('app_materiel_edit', {'id': materiel.id}) }}" class="bg-orange-500 text-white px-3 py-1 rounded hover:bg-orange-600 text-sm">
+                            Modifier
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3" class="px-4 py-6 text-center text-gray-500">Aucun matériel trouvé.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
 {% endblock %}
