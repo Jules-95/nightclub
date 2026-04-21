@@ -3,6 +3,8 @@
 namespace App\DataFixtures;
 
 use App\Factory\ArtisteFactory;
+use App\Factory\MaterielSoireeFactory;
+use App\Factory\MaterielFactory;
 use App\Factory\SoireeFactory;
 use App\Factory\ThemeFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -18,11 +20,18 @@ class AppFixtures extends Fixture
         $artistes = ArtisteFactory::createMany(10);
         $manager->flush();
 
+        MaterielFactory::createMany(5);
+        $manager->flush();
+
         SoireeFactory::createMany(10, function () use ($artistes, $themes) {
             return [
                 'artistes' => [$artistes[array_rand($artistes)]],
                 'theme' => $themes[array_rand($themes)]
             ];
         });
+
+        $manager->flush();
+
+        MaterielSoireeFactory::createMany(10);
     }
 }
