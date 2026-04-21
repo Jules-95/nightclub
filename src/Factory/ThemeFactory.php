@@ -15,9 +15,7 @@ final class ThemeFactory extends PersistentProxyObjectFactory
      *
      * @todo inject services if required
      */
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     public static function class(): string
     {
@@ -31,8 +29,10 @@ final class ThemeFactory extends PersistentProxyObjectFactory
      */
     protected function defaults(): array|callable
     {
+        $themes = ['Années 80', 'Années 90', 'Electro', 'Latino', 'Rétro'];
+
         return [
-            'nom' => self::faker()->text(255),
+            'nom' => $themes[array_rand($themes)],
         ];
     }
 
