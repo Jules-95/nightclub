@@ -24,6 +24,8 @@
                     <th class="px-4 py-3">Date soirée</th>
                     <th class="px-4 py-3">Date création</th>
                     <th class="px-4 py-3">Statut</th>
+                    {# Nouvelle colonne thème #}
+                    <th class="px-4 py-3">Thème</th>
                     {# Nouvelle colonne artistes #}
                     <th class="px-4 py-3">Artistes</th>
                     <th class="px-4 py-3">Actions</th>
@@ -38,6 +40,10 @@
                     <td class="px-4 py-3">{{ soiree.datesoiree ? soiree.datesoiree|date('d/m/Y H:i') : '' }}</td>
                     <td class="px-4 py-3">{{ soiree.datecreation ? soiree.datecreation|date('d/m/Y H:i') : '' }}</td>
                     <td class="px-4 py-3">{{ soiree.statut }}</td>
+                    {# Thème de la soirée #}
+                    <td class="px-4 py-3">
+                        {{soiree.theme ? soiree.theme.nom : 'Aucun'}}
+                    </td>
                     {# Liste des artistes cliquables #}
                     <td class="px-4 py-3">
                         <div class="flex flex-wrap gap-1">
@@ -64,7 +70,7 @@
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="7" class="px-4 py-6 text-center text-gray-500">Aucune soirée trouvée.</td>
+                    <td colspan="8" class="px-4 py-6 text-center text-gray-500">Aucune soirée trouvée.</td>
                 </tr>
             {% endfor %}
             </tbody>
