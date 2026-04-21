@@ -28,6 +28,7 @@
                     <th class="px-4 py-3">Thème</th>
                     {# Nouvelle colonne artistes #}
                     <th class="px-4 py-3">Artistes</th>
+                    <th class="px-4 py-3">Matériel</th>
                     <th class="px-4 py-3">Actions</th>
                 </tr>
             </thead>
@@ -57,6 +58,18 @@
                         {% endfor %}
                         </div>
                     </td>
+                    {# Liste des matériels de la soirée #}
+                    <td class="px-4 py-3">
+                        <div class="flex flex-wrap gap-1">
+                        {% for materielSoiree in soiree.materielSoirees %}
+                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs">
+                            {{ materielSoiree.materiel.nom }}
+                            </span>
+                        {% else %}
+                            <span class="text-gray-400 text-sm">Aucun</span>
+                        {% endfor %}
+                        </div>
+                    </td>
                     <td class="px-4 py-3 flex gap-2">
                         {# Bouton show en bleu #}
                         <a href="{{ path('app_soiree_show', {'id': soiree.id}) }}" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 text-sm">
@@ -70,7 +83,7 @@
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="8" class="px-4 py-6 text-center text-gray-500">Aucune soirée trouvée.</td>
+                    <td colspan="9" class="px-4 py-6 text-center text-gray-500">Aucune soirée trouvée.</td>
                 </tr>
             {% endfor %}
             </tbody>
