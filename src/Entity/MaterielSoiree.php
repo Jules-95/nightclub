@@ -19,10 +19,10 @@ class MaterielSoiree
     #[ORM\Column]
     private ?\DateTimeImmutable $dateReservationFin = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(inversedBy: 'materielSoirees')]
     private ?Materiel $materiel = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(inversedBy: 'materielSoirees')]
     private ?Soiree $soiree = null;
 
     public function getId(): ?int
