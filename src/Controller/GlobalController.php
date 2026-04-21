@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Form\ContactType;
+use App\Repository\SoireeRepository;
 use Symfony\UX\Map\Bridge\Leaflet\LeafletOptions;
 use Symfony\UX\Map\Bridge\Leaflet\Option\TileLayer;
 use Symfony\UX\Map\Map;
@@ -18,10 +19,11 @@ use Symfony\UX\Map\Point;
 final class GlobalController extends AbstractController
 {
     #[Route('/', name: 'app_global')]
-    public function index(): Response
+    public function index(SoireeRepository $soireeRepository): Response
     {
         return $this->render('global/index.html.twig', [
             'title' => '🪩 Night Club 🪩',
+            'soirees' => $soireeRepository->findProchainesSoirees(),
         ]);
     }
 

@@ -40,4 +40,15 @@ class SoireeRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findProchainesSoirees(): array
+{
+    return $this->createQueryBuilder('s')
+        ->where('s.datesoiree > :now')
+        ->setParameter('now', new \DateTimeImmutable())
+        ->orderBy('s.datesoiree', 'ASC')
+        ->setMaxResults(3)
+        ->getQuery()
+        ->getResult();
+}
 }
