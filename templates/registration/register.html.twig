@@ -1,23 +1,60 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Inscription{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
+<div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-xl shadow">
 
-    <h1>Register</h1>
+    <h1 class="text-2xl font-bold mb-6 text-center">Créer un compte</h1>
+
+    {# Erreurs email vérification #}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="bg-red-100 text-red-700 px-4 py-3 rounded mb-4">{{ flash_error }}</div>
+    {% endfor %}
 
     {{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+    {{ form_start(registrationForm, { attr: { 'data-turbo': 'false', 'class': 'space-y-4' } }) }}
 
-        <button type="submit" class="btn">Register</button>
+        <div class="flex flex-col gap-1">
+            {{ form_label(registrationForm.nom, 'Nom', { label_attr: { class: 'font-semibold' } }) }}
+            {{ form_widget(registrationForm.nom, { attr: { class: 'w-full border rounded px-3 py-2' } }) }}
+            <div class="text-red-500 text-sm">{{ form_errors(registrationForm.nom) }}</div>
+        </div>
+
+        <div class="flex flex-col gap-1">
+            {{ form_label(registrationForm.prenom, 'Prénom', { label_attr: { class: 'font-semibold' } }) }}
+            {{ form_widget(registrationForm.prenom, { attr: { class: 'w-full border rounded px-3 py-2' } }) }}
+            <div class="text-red-500 text-sm">{{ form_errors(registrationForm.prenom) }}</div>
+        </div>
+
+        <div class="flex flex-col gap-1">
+            {{ form_label(registrationForm.email, 'Email', { label_attr: { class: 'font-semibold' } }) }}
+            {{ form_widget(registrationForm.email, { attr: { class: 'w-full border rounded px-3 py-2' } }) }}
+            <div class="text-red-500 text-sm">{{ form_errors(registrationForm.email) }}</div>
+        </div>
+
+        <div class="flex flex-col gap-1">
+            {{ form_label(registrationForm.plainPassword, 'Mot de passe', { label_attr: { class: 'font-semibold' } }) }}
+            {{ form_widget(registrationForm.plainPassword, { attr: { class: 'w-full border rounded px-3 py-2' } }) }}
+            <div class="text-red-500 text-sm">{{ form_errors(registrationForm.plainPassword) }}</div>
+        </div>
+
+        <div class="flex items-center gap-2">
+            {{ form_widget(registrationForm.agreeTerms) }}
+            {{ form_label(registrationForm.agreeTerms, "J'accepte les conditions d'utilisation", { label_attr: { class: 'text-sm text-gray-600' } }) }}
+            <div class="text-red-500 text-sm">{{ form_errors(registrationForm.agreeTerms) }}</div>
+        </div>
+
+        <button type="submit" class="w-full bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 cursor-pointer">
+            S'inscrire
+        </button>
+
     {{ form_end(registrationForm) }}
+
+    <p class="text-center text-gray-500 text-sm mt-4">
+        Déjà un compte ? <a href="{{ path('app_login') }}" class="text-blue-600 hover:underline">Se connecter</a>
+    </p>
+
+</div>
 {% endblock %}
