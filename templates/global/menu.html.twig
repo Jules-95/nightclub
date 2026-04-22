@@ -29,11 +29,21 @@
             </a>
             <a href="{{ path('app_global_apropos') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">À propos</a>
             <a href="{{ path('contact') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Contact</a>
-            {# Liens nightclub #}
-            <a href="{{ path('app_soiree_index') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Soirées</a>
-            <a href="{{ path('app_artiste_index') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Artistes</a>
-            <a href="{{ path('app_materiel_index') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Matériel</a>
-            <a href="{{ path('app_materiel_soiree_index') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Réservations</a>
+
+            {# Lien connexion si non connecté #}
+            {% if not is_granted('ROLE_USER') %}
+              <a href="{{ path('app_login') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Connexion</a>
+            {% endif %}
+
+            {# Lien Dashboard uniquement si admin #}
+            {% if is_granted('ROLE_ADMIN') %}
+              <a href="{{ path('app_admin') }}" class="rounded-md px-3 py-2 text-sm font-medium text-yellow-300 hover:bg-white/5 hover:text-white">Dashboard</a>
+            {% endif %}
+
+            {# Lien déconnexion si connecté #}
+            {% if is_granted('ROLE_USER') %}
+              <a href="{{ path('app_logout') }}" class="rounded-md px-3 py-2 text-sm font-medium text-red-400 hover:bg-white/5 hover:text-white">Déconnexion</a>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -48,11 +58,21 @@
       </a>
       <a href="{{ path('app_global_apropos') }}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">À propos</a>
       <a href="{{ path('contact') }}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">Contact</a>
-      {# Liens nightclub mobile #}
-      <a href="{{ path('app_soiree_index') }}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">Soirées</a>
-      <a href="{{ path('app_artiste_index') }}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">Artistes</a>
-      <a href="{{ path('app_materiel_index') }}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">Matériel</a>
-      <a href="{{ path('app_materiel_soiree_index') }}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">Réservations</a>
+
+      {# Lien connexion si non connecté #}
+      {% if not is_granted('ROLE_USER') %}
+        <a href="{{ path('app_login') }}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">Connexion</a>
+      {% endif %}
+
+      {# Lien Dashboard uniquement si admin #}
+      {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('app_admin') }}" class="block rounded-md px-3 py-2 text-base font-medium text-yellow-300 hover:bg-white/5 hover:text-white">Dashboard</a>
+      {% endif %}
+
+      {# Lien déconnexion si connecté #}
+      {% if is_granted('ROLE_USER') %}
+        <a href="{{ path('app_logout') }}" class="block rounded-md px-3 py-2 text-base font-medium text-red-400 hover:bg-white/5 hover:text-white">Déconnexion</a>
+      {% endif %}
     </div>
   </el-disclosure>
 </nav>
